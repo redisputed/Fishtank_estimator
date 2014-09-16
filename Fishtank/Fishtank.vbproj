@@ -114,6 +114,11 @@
     <Compile Include="EstimateGrid.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FishtankDataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FishtankDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -151,6 +156,17 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="FishtankDataSet.xsc">
+      <DependentUpon>FishtankDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="FishtankDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FishtankDataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="FishtankDataSet.xss">
+      <DependentUpon>FishtankDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Fishtank_TemporaryKey.pfx" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -187,6 +203,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FFS icon.ico" />
+    <Content Include="Fishtank.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

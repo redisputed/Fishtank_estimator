@@ -2,9 +2,6 @@
     ' Actions  and code in this form take inspiration from 
     ' Starting Out With Visual Basic. 2010 Fifth Edition Tony Gaddis and Kip Irvine
 
-    Const decGUPPIE_PRICE As Decimal = 1.0
-    Const decANGEL_FISH_PRICE As Decimal = 1.5
-    Const decCLOWN_FISH_PRICE As Decimal = 2.0
 
     Const decBASIC_FILTER_PRICE As Decimal = 5.0
     Const decSUPER_QUIET_FILTER_PRICE As Decimal = 10.0
@@ -28,8 +25,7 @@
 
     Private Sub resetOptions()
         'reset the options listbox and radio buttons
-        'TODO replace with combo box
-        lstFishSelect.SelectedIndex = -1
+        cbFishSelect.SelectedIndex = -1
         radBasicFilter.Checked = False
         radSuperQtFilter.Checked = False
         radLongLifeFilter.Checked = False
@@ -44,32 +40,8 @@
 
     Private Function calcFishSubtotal(ByVal intFishQuant) As Decimal
         Dim decFishSubtotal As Decimal = 0.0
-        'TODO Rewrite to account for database fish info
 
-        If lstFishSelect.SelectedIndex <> -1 Then
-            Select Case lstFishSelect.SelectedIndex
-                Case 0
-                    'Guppies $1
-                    decFishSubtotal = intFishQuant * decGUPPIE_PRICE
-
-                Case 1
-                    'Angel Fish $1.50
-                    decFishSubtotal = intFishQuant * decANGEL_FISH_PRICE
-
-                Case 2
-                    'Clown Fish $2
-                    decFishSubtotal = intFishQuant * decCLOWN_FISH_PRICE
-
-                Case Else
-                    'Error
-                    MsgBox("Something went terribly wrong... Exiting program!")
-                    Me.Close()
-
-            End Select
-        Else
-            MsgBox("Please select a Fish from the list and recaclulate.")
-
-        End If
+        decFishSubtotal = cbFishSelect.SelectedValue * intFishQuant
 
         Return decFishSubtotal
     End Function
@@ -178,6 +150,7 @@
 
         Catch ex As InvalidCastException
             MessageBox.Show("Error: Please provide all values before pressing Enter")
+            Exit Sub
 
         End Try
 
@@ -235,12 +208,19 @@
                     'bad input
                     MessageBox.Show("Height must be 12 - 72 inches")
                     e.Cancel = True
+                    txtInputHeight.Focus()
+                    txtInputHeight.SelectionStart = 0
+                    txtInputHeight.SelectionLength = txtInputHeight.Text.Length
+
 
                 End If
 
             Catch ex As InvalidCastException
                 MessageBox.Show("Error: Please enter a numeric value")
                 e.Cancel = True
+                txtInputHeight.Focus()
+                txtInputHeight.SelectionStart = 0
+                txtInputHeight.SelectionLength = txtInputHeight.Text.Length
 
             End Try
         End If
@@ -260,12 +240,18 @@
                     'bad input
                     MessageBox.Show("Length must be 12 - 96 inches")
                     e.Cancel = True
+                    txtInputLength.Focus()
+                    txtInputLength.SelectionStart = 0
+                    txtInputLength.SelectionLength = txtInputLength.Text.Length
 
                 End If
 
             Catch ex As InvalidCastException
                 MessageBox.Show("Error: Please enter a numeric value")
                 e.Cancel = True
+                txtInputLength.Focus()
+                txtInputLength.SelectionStart = 0
+                txtInputLength.SelectionLength = txtInputLength.Text.Length
 
             End Try
 
@@ -286,12 +272,18 @@
                     'bad input
                     MessageBox.Show("Width must be 12 - 96 inches")
                     e.Cancel = True
+                    txtInputWidth.Focus()
+                    txtInputWidth.SelectionStart = 0
+                    txtInputWidth.SelectionLength = txtInputWidth.Text.Length
 
                 End If
 
             Catch ex As InvalidCastException
                 MessageBox.Show("Error: Please enter a numeric value")
                 e.Cancel = True
+                txtInputWidth.Focus()
+                txtInputWidth.SelectionStart = 0
+                txtInputWidth.SelectionLength = txtInputWidth.Text.Length
 
             End Try
 
@@ -310,6 +302,9 @@
 
     Private Sub txtInputMaxLength_GotFocus(sender As Object, e As EventArgs) Handles txtInputMaxLength.GotFocus
         lblInputLength.Text = "Min Length"
+        txtInputHeight.Enabled = False
+        txtInputWidth.Enabled = False
+
     End Sub
 
     Private Sub txtInputMaxLength_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles txtInputMaxLength.Validating
@@ -416,6 +411,12 @@
         Next
 
         frmEstimator.ShowDialog()
+
+    End Sub
+
+    Private Sub Aquarium_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Me.FishTableAdapter.Fill(Me.FishtankDataSet.Fish)
+        resetOptions()
 
     End Sub
 End Class

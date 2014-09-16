@@ -35,76 +35,88 @@ Partial Class EstimateGrid
         Me.NumFilters = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CostFilters = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TotalCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MyApplicationBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.btnReturn = New System.Windows.Forms.Button()
         Me.btnOutputText = New System.Windows.Forms.Button()
+        Me.MyApplicationBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.dgLengthEstimate, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MyApplicationBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'dgLengthEstimate
         '
+        Me.dgLengthEstimate.AllowUserToAddRows = False
+        Me.dgLengthEstimate.AllowUserToDeleteRows = False
+        Me.dgLengthEstimate.AllowUserToResizeColumns = False
+        Me.dgLengthEstimate.AllowUserToResizeRows = False
         Me.dgLengthEstimate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgLengthEstimate.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Length, Me.Width, Me.Height, Me.TankSize, Me.Capacity, Me.NumFish, Me.CostFish, Me.NumFilters, Me.CostFilters, Me.TotalCost})
         Me.dgLengthEstimate.Location = New System.Drawing.Point(41, 12)
         Me.dgLengthEstimate.Name = "dgLengthEstimate"
+        Me.dgLengthEstimate.ReadOnly = True
+        Me.dgLengthEstimate.RowHeadersVisible = False
         Me.dgLengthEstimate.RowHeadersWidth = 80
-        Me.dgLengthEstimate.Size = New System.Drawing.Size(1091, 400)
+        Me.dgLengthEstimate.Size = New System.Drawing.Size(1004, 400)
         Me.dgLengthEstimate.TabIndex = 0
         '
         'Length
         '
         Me.Length.HeaderText = "Length"
         Me.Length.Name = "Length"
+        Me.Length.ReadOnly = True
         '
         'Width
         '
         Me.Width.HeaderText = "Width"
         Me.Width.Name = "Width"
+        Me.Width.ReadOnly = True
         '
         'Height
         '
         Me.Height.HeaderText = "Height"
         Me.Height.Name = "Height"
+        Me.Height.ReadOnly = True
         '
         'TankSize
         '
         Me.TankSize.HeaderText = "Tank Size"
         Me.TankSize.Name = "TankSize"
+        Me.TankSize.ReadOnly = True
         '
         'Capacity
         '
         Me.Capacity.HeaderText = "Amount of Water"
         Me.Capacity.Name = "Capacity"
+        Me.Capacity.ReadOnly = True
         '
         'NumFish
         '
         Me.NumFish.HeaderText = "Number of Fish"
         Me.NumFish.Name = "NumFish"
+        Me.NumFish.ReadOnly = True
         '
         'CostFish
         '
         Me.CostFish.HeaderText = "Cost of Fish"
         Me.CostFish.Name = "CostFish"
+        Me.CostFish.ReadOnly = True
         '
         'NumFilters
         '
         Me.NumFilters.HeaderText = "Number of Filters"
         Me.NumFilters.Name = "NumFilters"
+        Me.NumFilters.ReadOnly = True
         '
         'CostFilters
         '
         Me.CostFilters.HeaderText = "Cost of Filters"
         Me.CostFilters.Name = "CostFilters"
+        Me.CostFilters.ReadOnly = True
         '
         'TotalCost
         '
         Me.TotalCost.HeaderText = "Total Cost"
         Me.TotalCost.Name = "TotalCost"
-        '
-        'MyApplicationBindingSource
-        '
-        Me.MyApplicationBindingSource.DataSource = GetType(Fishtank.My.MyApplication)
+        Me.TotalCost.ReadOnly = True
         '
         'btnReturn
         '
@@ -124,12 +136,16 @@ Partial Class EstimateGrid
         Me.btnOutputText.Text = "&Output to TextFile"
         Me.btnOutputText.UseVisualStyleBackColor = True
         '
+        'MyApplicationBindingSource
+        '
+        Me.MyApplicationBindingSource.DataSource = GetType(Fishtank.My.MyApplication)
+        '
         'EstimateGrid
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.DarkTurquoise
-        Me.ClientSize = New System.Drawing.Size(1184, 461)
+        Me.ClientSize = New System.Drawing.Size(1087, 461)
         Me.Controls.Add(Me.btnOutputText)
         Me.Controls.Add(Me.btnReturn)
         Me.Controls.Add(Me.dgLengthEstimate)

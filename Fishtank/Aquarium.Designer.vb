@@ -22,6 +22,7 @@ Partial Class Aquarium
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Aquarium))
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtInputHeight = New System.Windows.Forms.TextBox()
@@ -42,7 +43,6 @@ Partial Class Aquarium
         Me.radLongLifeFilter = New System.Windows.Forms.RadioButton()
         Me.radSuperQtFilter = New System.Windows.Forms.RadioButton()
         Me.radBasicFilter = New System.Windows.Forms.RadioButton()
-        Me.lstFishSelect = New System.Windows.Forms.ListBox()
         Me.txtTotal = New System.Windows.Forms.TextBox()
         Me.txtFilterSubtotal = New System.Windows.Forms.TextBox()
         Me.txtFishSubtotal = New System.Windows.Forms.TextBox()
@@ -57,12 +57,18 @@ Partial Class Aquarium
         Me.btnEstimate = New System.Windows.Forms.Button()
         Me.txtInputMaxLength = New System.Windows.Forms.TextBox()
         Me.lblInputMaxLength = New System.Windows.Forms.Label()
+        Me.cbFishSelect = New System.Windows.Forms.ComboBox()
+        Me.bsFishTank = New System.Windows.Forms.BindingSource(Me.components)
+        Me.FishtankDataSet = New Fishtank.FishtankDataSet()
+        Me.FishTableAdapter = New Fishtank.FishtankDataSetTableAdapters.FishTableAdapter()
         Me.GroupBox1.SuspendLayout()
         CType(Me.picFishTankWireFrame, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.LengthEst.SuspendLayout()
+        CType(Me.bsFishTank, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.FishtankDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -222,10 +228,10 @@ Partial Class Aquarium
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.cbFishSelect)
         Me.GroupBox2.Controls.Add(Me.radLongLifeFilter)
         Me.GroupBox2.Controls.Add(Me.radSuperQtFilter)
         Me.GroupBox2.Controls.Add(Me.radBasicFilter)
-        Me.GroupBox2.Controls.Add(Me.lstFishSelect)
         Me.GroupBox2.Location = New System.Drawing.Point(12, 146)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(269, 99)
@@ -265,15 +271,6 @@ Partial Class Aquarium
         Me.radBasicFilter.TabStop = True
         Me.radBasicFilter.Text = "Basic Filter"
         Me.radBasicFilter.UseVisualStyleBackColor = True
-        '
-        'lstFishSelect
-        '
-        Me.lstFishSelect.FormattingEnabled = True
-        Me.lstFishSelect.Items.AddRange(New Object() {"Guppies - $1.00/fish", "Angel Fish - $1.50/fish", "Clown Fish - $2.00/fish"})
-        Me.lstFishSelect.Location = New System.Drawing.Point(12, 32)
-        Me.lstFishSelect.Name = "lstFishSelect"
-        Me.lstFishSelect.Size = New System.Drawing.Size(125, 43)
-        Me.lstFishSelect.TabIndex = 4
         '
         'txtTotal
         '
@@ -412,6 +409,32 @@ Partial Class Aquarium
         Me.lblInputMaxLength.TabIndex = 4
         Me.lblInputMaxLength.Text = "Max Length:"
         '
+        'cbFishSelect
+        '
+        Me.cbFishSelect.DataSource = Me.bsFishTank
+        Me.cbFishSelect.DisplayMember = "FishName"
+        Me.cbFishSelect.FormattingEnabled = True
+        Me.cbFishSelect.Location = New System.Drawing.Point(14, 20)
+        Me.cbFishSelect.Name = "cbFishSelect"
+        Me.cbFishSelect.Size = New System.Drawing.Size(121, 21)
+        Me.cbFishSelect.TabIndex = 8
+        Me.cbFishSelect.Text = "Select A Fish"
+        Me.cbFishSelect.ValueMember = "FishCost"
+        '
+        'bsFishTank
+        '
+        Me.bsFishTank.DataMember = "Fish"
+        Me.bsFishTank.DataSource = Me.FishtankDataSet
+        '
+        'FishtankDataSet
+        '
+        Me.FishtankDataSet.DataSetName = "FishtankDataSet"
+        Me.FishtankDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'FishTableAdapter
+        '
+        Me.FishTableAdapter.ClearBeforeFill = True
+        '
         'Aquarium
         '
         Me.AcceptButton = Me.btnCalcVolume
@@ -450,6 +473,8 @@ Partial Class Aquarium
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.LengthEst.ResumeLayout(False)
         Me.LengthEst.PerformLayout()
+        CType(Me.bsFishTank, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.FishtankDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -471,7 +496,6 @@ Partial Class Aquarium
     Friend WithEvents lblVolume As System.Windows.Forms.Label
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents radBasicFilter As System.Windows.Forms.RadioButton
-    Friend WithEvents lstFishSelect As System.Windows.Forms.ListBox
     Friend WithEvents lblFishSubTotal As System.Windows.Forms.Label
     Friend WithEvents radLongLifeFilter As System.Windows.Forms.RadioButton
     Friend WithEvents radSuperQtFilter As System.Windows.Forms.RadioButton
@@ -488,5 +512,9 @@ Partial Class Aquarium
     Friend WithEvents txtInputMaxLength As System.Windows.Forms.TextBox
     Friend WithEvents lblInputMaxLength As System.Windows.Forms.Label
     Friend WithEvents btnEstimate As System.Windows.Forms.Button
+    Friend WithEvents cbFishSelect As System.Windows.Forms.ComboBox
+    Friend WithEvents bsFishTank As System.Windows.Forms.BindingSource
+    Friend WithEvents FishtankDataSet As Fishtank.FishtankDataSet
+    Friend WithEvents FishTableAdapter As Fishtank.FishtankDataSetTableAdapters.FishTableAdapter
 
 End Class
